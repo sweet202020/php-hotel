@@ -39,12 +39,13 @@ $hotels = [
     ],
 
 ];
-var_dump($_GET);
-if (!$_GET['parking']) {
-    echo 'ciao';
-} else {
-    foreach ($hotels as $hotel) {
-        echo $hotel['parking'];
+var_dump($_POST);
+$parkChoice = $_POST['parking'];
+if ($parkChoice === 'on') {
+    foreach ($hotels as $key => $hotel) {
+        if (!$hotel['parking']) {
+            unset($hotels[$key]);
+        }
     }
 }
 
@@ -68,61 +69,35 @@ if (!$_GET['parking']) {
 
 <body>
     <h1 class="text-center mb-5">Hotels</h1>
-    <form action="index.php" method="get">
+    <form action="index.php" method="post">
         <input type="checkbox" name="parking" id="parking">Parcheggio
         <button type="submit">invia richiesta</button>
     </form>
-    <div class="table-responsive">
-        <table class="table table-striped
-        table-hover	
-        table-borderless
-        table-primary
-        align-middle">
-            <thead class="table-light">
-                <tr>
-                    <td></td>
-                    <?php foreach ($hotels as $hotel) : ?>
-
-                        <td scope="row"><?= $hotel['name'] ?></td>
-                    <?php endforeach ?>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                <tr class="table-primary">
-                    <td>descrizione</td>
-                    <?php foreach ($hotels as $hotel) : ?>
-                        <td scope="row"><?= $hotel['description'] ?></td>
-                    <?php endforeach ?>
-                </tr>
-                <tr class="table-primary">
-                    <td>parcheggio</td>
-                    <?php foreach ($hotels as $hotel) : ?>
-                        <td scope="row">
+    <div class="container">
+        <div class="row row-cols-5">
+            <?php foreach ($hotels as $hotel) : ?>
+                <div class="col">
+                    <div class="card">
+                        <h2><?= $hotel['name'] ?></h2>
+                        <div><?= $hotel['description'] ?></div>
+                        <div>
                             <?php if ($hotel['parking']) {
-                                echo 'si';
+                                echo ('parcheggio disponibile');
                             } else {
-                                echo 'no';
-                            } ?>
-                        </td>
-                    <?php endforeach ?>
-                </tr>
-                <tr class="table-primary">
-                    <td>voto</td>
-                    <?php foreach ($hotels as $hotel) : ?>
-                        <td scope="row"><?= $hotel['vote'] ?></td>
-                    <?php endforeach ?>
-                </tr>
-                <tr class="table-primary">
-                    <td>distanza dal centro</td>
-                    <?php foreach ($hotels as $hotel) : ?>
-                        <td scope="row"><?= $hotel['distance_to_center'] ?></td>
-                    <?php endforeach ?>
-                </tr>
-            </tbody>
-            <tfoot>
+                                echo ('parcheggio non disponibile');
+                            }
 
-            </tfoot>
-        </table>
+                            ?>
+                        </div>
+                        <div><?= 'voto: ' . $hotel['vote'] ?></div>
+                        <div><?= 'distanza dal centro: ' . $hotel['distance_to_center'] . 'km' ?></div>
+                    </div>
+
+
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
