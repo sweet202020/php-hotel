@@ -42,31 +42,81 @@ $hotels = [
 
 ?>
 
-<!DOCTYPE html>
+</html>
+
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <ul>
-        <?php foreach ($hotels as $hotel) : ?>
-            <li>
-                <?=
-                $hotel['name'] . ' --- ' .
-                    $hotel['description'] . ' --- ' .
-                    $hotel['parking'] . ' --- ' .
-                    $hotel['vote'] . ' --- ' .
-                    $hotel['distance_to_center']
-                ?>
+    <h1 class="text-center mb-5">Hotels</h1>
+    <div class="table-responsive">
+        <table class="table table-striped
+        table-hover	
+        table-borderless
+        table-primary
+        align-middle">
+            <thead class="table-light">
+                <tr>
+                    <td></td>
+                    <?php foreach ($hotels as $hotel) : ?>
+                        <td scope="row"><?= $hotel['name'] ?></td>
+                    <?php endforeach ?>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr class="table-primary">
+                    <td>descrizione</td>
+                    <?php foreach ($hotels as $hotel) : ?>
+                        <td scope="row"><?= $hotel['description'] ?></td>
+                    <?php endforeach ?>
+                </tr>
+                <tr class="table-primary">
+                    <td>parcheggio</td>
+                    <?php foreach ($hotels as $hotel) : ?>
+                        <td scope="row">
+                            <?php if ($hotel['parking']) {
+                                echo 'si';
+                            } else {
+                                echo 'no';
+                            } ?>
+                        </td>
+                    <?php endforeach ?>
+                </tr>
+                <tr class="table-primary">
+                    <td>voto</td>
+                    <?php foreach ($hotels as $hotel) : ?>
+                        <td scope="row"><?= $hotel['vote'] ?></td>
+                    <?php endforeach ?>
+                </tr>
+                <tr class="table-primary">
+                    <td>distanza dal centro</td>
+                    <?php foreach ($hotels as $hotel) : ?>
+                        <td scope="row"><?= $hotel['distance_to_center'] ?></td>
+                    <?php endforeach ?>
+                </tr>
+            </tbody>
+            <tfoot>
 
-            </li>
-        <?php endforeach ?>
-    </ul>
+            </tfoot>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
