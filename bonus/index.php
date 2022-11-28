@@ -39,11 +39,13 @@ $hotels = [
     ],
 
 ];
-/* var_dump($_POST); */
 $parkChoice = isset($_POST['parking']);
-if ($parkChoice) {
+$ratingStars = ($_POST['rating']);
+/* var_dump($_POST); */
+if ($parkChoice || $ratingStars) {
     foreach ($hotels as $key => $hotel) {
-        if (!$hotel['parking']) {
+        if (!$hotel['parking'] || $hotel['vote'] < $ratingStars) {
+            /* var_dump($hotels[$key]); */
             unset($hotels[$key]);
         }
     }
@@ -71,6 +73,7 @@ if ($parkChoice) {
     <h1 class="text-center mb-5">Hotels</h1>
     <form action="index.php" method="post">
         <input type="checkbox" name="parking" id="parking">Parcheggio
+        <input type="number" name="rating" id="rating" max="5" placeholder="filtra per rating">
         <button type="submit">invia richiesta</button>
     </form>
     <div class="container">
