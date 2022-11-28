@@ -39,9 +39,9 @@ $hotels = [
     ],
 
 ];
-var_dump($_POST);
-$parkChoice = $_POST['parking'];
-if ($parkChoice === 'on') {
+/* var_dump($_POST); */
+$parkChoice = isset($_POST['parking']);
+if ($parkChoice) {
     foreach ($hotels as $key => $hotel) {
         if (!$hotel['parking']) {
             unset($hotels[$key]);
